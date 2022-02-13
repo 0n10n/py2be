@@ -1,0 +1,2 @@
+set PATH=C:\Python310;%PATH%
+set PYTHONPATH=%PYTHONPATH%;C:\Python310\Lib

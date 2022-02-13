@@ -40,3 +40,22 @@ print("Number of girls is : ", z)
 print()
 ```
 
+使用list 
+
+```
+# taking two input at a time
+
+x, y = [int(x) for x in input("Enter two values: ").split()]
+print("First Number is: ", x)
+print("Second Number is: ", y)
+print()
+
+# taking three input at a time
+
+x, y, z = [int(x) for x in input("Enter three values: ").split()]
+print("First Number is: ", x)
+print("Second Number is: ", y)
+print("Third Number is: ", z)
+print()
+```
+
