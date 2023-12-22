@@ -1,3 +1,7 @@
+#学习Python后的练手脚本。
+#列出对外tcp连接的目标IP+端口及对应的进程路径，熟悉一下数据结构的用法
+#也算磕磕巴巴地实现了... 2023/12/22
+
 import subprocess  
 import re  
 import psutil  
