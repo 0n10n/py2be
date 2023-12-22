@@ -1,6 +1,14 @@
 # py2be
 从零开始
 
+[2023/12/11]
+
+- https://pythontutor.com/ 每句执行顺序和对象状态展示
+
+[2023/11/16]
+
+- https://docs.python.org/3/reference/simple_stmts.html 语句语法
+
 [2023/11/14]
 
 - https://www.geeksforgeeks.org/python-functions/
