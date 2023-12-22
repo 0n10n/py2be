@@ -57,7 +57,6 @@ for array in establish_list:
             #print(f"找不到进程ID: {pid}")
 
 
-
 for ip_key in sorted(dst.keys(), reverse=False):
-    print(f"{ip_key}, { "/".join(dst[ip_key]) }, {"  ".join(pids[ip_key])} ")
+    print(f"{ip_key}, { '/'.join(dst[ip_key]) }, {'  '.join(pids[ip_key])} ")
 
