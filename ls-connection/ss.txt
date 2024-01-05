@@ -1,0 +1,5 @@
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp        0      0 192.168.99.91:46864     192.168.100.18:21       ESTABLISHED 43591/ftp
+tcp        0      0 192.168.99.91:55852     151.101.110.132:80      TIME_WAIT   -
+tcp        0    208 192.168.99.91:22        192.168.99.3:35959      ESTABLISHED 43592/sshd: danzhu
+tcp        0      0 192.168.99.91:22        192.168.99.3:13071      ESTABLISHED 38935/sshd: danzhu
