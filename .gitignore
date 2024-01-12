@@ -111,3 +111,7 @@ env.bak/
 venv.bak/
 
 learning/
+dl-sina-blog/images/*
+dl-sina-blog/images*
+dl-sina-blog/pdf
+dl-sina-blog/*.md
