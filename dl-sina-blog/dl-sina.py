@@ -4,7 +4,10 @@ import re
 import os
 from markdownify import markdownify as md    
 
-urls=[]
+
+blog_id = '1218966851' #zsw
+#blog_id='1198952915' #zyw
+del_old_files = True
 
 def extract_links_and_titles(text):  
     pattern = r'<a title=".*" target="_blank" href="([^"]*)">([^<]*)<\/a>'  
@@ -91,15 +94,20 @@ def write_markdown(url,title,blogtime,content,filename):
         file.write("-" * 6 )    
 
 def get_maxpage(id):
-    response = requests.get(f'https://blog.sina.com.cn/s/articlelist_{id}_0_1.html')  
-    match = re.search(r'共(\d+)页', response.content.decode('UTF-8', errors='ignore'))  
-    if match:  
-        maxpage = match.group(1) 
-        return maxpage
-    
-#blog_id='1218966851'
-blog_id='1198952915'
+    try:
+        response = requests.get(f'https://blog.sina.com.cn/s/articlelist_{id}_0_1.html')  
+        match = re.search(r'共(\d+)页', response.content.decode('UTF-8', errors='ignore'))  
+        if match:  
+            maxpage = match.group(1) 
+            return maxpage
+    except Exception as errh: 
+        print(f'HTTP Error: {errh.args[0]}, Fail to get: blog.sina.com.cn/s/articlelist_{id}_0_1.html') 
+        exit(1)
 
+    
+
+    
+urls=[]
 id=blog_id if len(sys.argv)<2 else sys.argv[1]
 print(id)
 
@@ -107,10 +115,11 @@ headers = {
     'Referer': f'https://blog.sina.com.cn/s/articlelist_{id}_0.html'
 }  
 
-for filename in os.listdir():  
-    if filename.startswith(f'{id}'):  
-        os.remove(filename) 
-        print(f'已删除 {filename}') 
+if del_old_files:
+    for filename in os.listdir():  
+        if filename.startswith(f'{id}'):  
+            os.remove(filename) 
+            print(f'已删除 {filename}') 
 
 maxpage=int(get_maxpage(id))
 print(f'maxpage {maxpage}')
@@ -127,18 +136,19 @@ for i in range(1, maxpage+1, 1):
 count = 0  
 page=1
 #反序排列（先取出时间久远的blog）
+print(len(urls))
+
 for i in range(len(urls)-1, -1, -1):  
     title,blogtime,content = get_content(f"https:{urls[i]}")
     print(f"{i} https:{urls[i]}")
     filepath = f'{id}_{page}.md' 
     write_markdown(f'https:{urls[i]}',f'{page}/{count+1} {title}',blogtime,content,filepath)
-    download_img(urls[i],content)
+    #download_img(urls[i],content)
     count += 1  
     with open(f'{id}.md', 'a') as file: 
         file.write(f'{count} [{title}](https:{urls[i]})|({blogtime}) \r\n\r\n')
     if count % 30 == 0:  
         page += 1  
-    if count == 40:  
-        pass
+
 
 
