@@ -33,10 +33,12 @@ pip install requests
 python3 dl-bing-wallpaper.py
 ```
 
-4，自己用来存放手机版下载图片的地方：http://aws.debagua.com/bing-wallpaper/ 等以后再弄个合适的Web前端。
+4，自己用来存放手机版下载图片的地方：http://aws.debagua.com/bing/ 等以后再弄个合适的Web前端。
 
 ## 已知问题：
 
 - 没有再细分子目录的保存，待完善。
+
+- flask不懂，现在搞得很笨拙，慢慢来，希望可以分页，可以切换地区。
 
   
