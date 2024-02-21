@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Image Viewer</title>
+</head>
+<body>
+    <h1>Image Viewer</h1>
+        <div class="gallery">
+        <div class="image">
+        {% for image_file in image_files %}
+        <img src="/images/JA-JP/{{ image_file }}" alt="{{ image_file }}">
+        {% endfor %}
+        </div>
+        </div>
+</body>
+</html>

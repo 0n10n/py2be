@@ -75,7 +75,7 @@ resolutions=['800x600', '1024x768', '1280x720', '1280x768', '1366x768', '1920x10
 #如果需要遍历所有的地区，则把下一句改为 desire_locales=list(regions.keys())
 desire_locales=["zh-CN","ja-JP","en-US"]
 desire_resolutions=['1080x1920']
-download_folder='/mnt/d/temp/bing-wallpaper'
+download_folder='./static/images'
 n_value=5
 bing_wallpaper_api_url_template='https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n={n}&mkt={locale}'
 host='https://bing.com'
