@@ -76,7 +76,7 @@ resolutions=['800x600', '1024x768', '1280x720', '1280x768', '1366x768', '1920x10
 desire_locales=["zh-CN","ja-JP","en-US"]
 desire_resolutions=['1080x1920']
 download_folder='/mnt/d/temp/bing-wallpaper'
-n_value=1
+n_value=5
 bing_wallpaper_api_url_template='https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n={n}&mkt={locale}'
 host='https://bing.com'
 
@@ -120,6 +120,8 @@ def get_wallpapers_all(desire_locales):
         locale_wallpapers = get_wallpapers_single(apiurl)
         if locale_wallpapers:
             wallpapers.extend(locale_wallpapers)
+        #多加个小任务，给每种语言创建一个子目录
+        mkdir(f'{download_folder}/{locale}')
     return wallpapers
 
 def get_base_filename(str):
@@ -137,13 +139,22 @@ def mkdir(local_dir):
         os.makedirs(local_dir)  
     else:  
         pass
-
-                
+    
+#从类似这样的：OHR.PeakDistrictNP_ZH-CN1987784653_XXX 文件名中获得区域代码
+def get_locale_from_filename(s):
+    pattern = r'_([^0-9]+)'  
+    match = re.search(pattern, s)  
+    language_part = 'default'
+    if match:  
+        language_part = match.group(1)  
+    return language_part
+        
 def download_wallpapers(wallpapers,desire_resolutions):
     for wallpaper in wallpapers:
         for desire_resolution in desire_resolutions:
             url = f'{wallpaper["urlbase"]}_{desire_resolution}.jpg'
             print(f'url: {url} {wallpaper["title"]}')
+            locale = get_locale_from_filename(get_base_filename(wallpaper["urlbase"]))
             filename = f'{wallpaper["startdate"]}_{get_base_filename(wallpaper["urlbase"])}_{desire_resolution}.jpg'
             headers = { 
                 'referer': f'https:{url}',
@@ -152,7 +163,8 @@ def download_wallpapers(wallpapers,desire_resolutions):
             }
             try:
                 response = requests.get(f'{host}{url}',headers=headers,timeout=3)
-                with open(f'{download_folder}/{filename}', 'wb') as f:  
+                #在下载目录下，根据语种（locale）存放下载的图片
+                with open(f'{download_folder}/{locale}/{filename}', 'wb') as f:  
                     f.write(response.content)        
             except Exception as errh: 
                 print(f'HTTP Error: {errh.args[0]}, URL: {url}')             
@@ -160,7 +172,6 @@ def download_wallpapers(wallpapers,desire_resolutions):
 
 def main():
     wallpapers = get_wallpapers_all(desire_locales)
-    mkdir(download_folder)
     download_wallpapers(wallpapers,desire_resolutions)
 if __name__ == '__main__':
     sys.exit(main())
