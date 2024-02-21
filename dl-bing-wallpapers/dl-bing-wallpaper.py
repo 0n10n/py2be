@@ -121,7 +121,7 @@ def get_wallpapers_all(desire_locales):
         if locale_wallpapers:
             wallpapers.extend(locale_wallpapers)
         #多加个小任务，给每种语言创建一个子目录
-        mkdir(f'{download_folder}/{locale}')
+        mkdir(f'{download_folder}/{locale.upper()}')
     return wallpapers
 
 def get_base_filename(str):

@@ -33,7 +33,7 @@ pip install requests
 python3 dl-bing-wallpaper.py
 ```
 
-
+4，自己用来存放手机版下载图片的地方：http://aws.debagua.com/bing-wallpaper/ 等以后再弄个合适的Web前端。
 
 ## 已知问题：
 
