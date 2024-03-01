@@ -1,6 +1,10 @@
 # py2be
 从零开始
 
+[2024/02/21] 
+
+- https://python-adv-web-apps.readthedocs.io/en/latest/ 准备来学习一下flask
+
 [2023/12/11]
 
 - https://pythontutor.com/ 每句执行顺序和对象状态展示
