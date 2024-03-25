@@ -40,4 +40,4 @@ python main.py -f 需要修改的文件名.md
 
 ## 注意事项
 1，仅仅针对markdown格式的图片嵌入格式，不支持html的；
-2，仅仅支持图片的URL地址是包含"域名"+"路径"+"文件名"的，如`https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png` 。如果是动态链接生成的，会有问题。
+2，仅仅支持图片的URL地址是包含"域名"+"路径"+"文件名"的，如`https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png` 。如果是动态链接生成的，如`http://your_host/get_pic?id=1234`，会有问题。
