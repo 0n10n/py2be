@@ -2,11 +2,8 @@
 # -*- coding: UTF-8 -*-
 
 import sys
-import requests
-import re
 import os
 import argparse
-import platform  
 import paramiko
 import tarfile
 import subprocess
@@ -14,7 +11,7 @@ import subprocess
 prefix='/product'
 base_dir = '/tmp'
 unzip_dir = 'install'
-
+command = ['./install.sh']
 def print_help():
     print('Usage: ')
     print(f'  python {os.path.basename(__file__)} -u sftp_username -p sftp_passwd -l sftp_host -i item_name')
@@ -103,7 +100,7 @@ def main():
         latest_filename = get_latest_sftp_filename(sftphost,sftpuser,sftppwd,item,prefix)
         unzip_dl_file(f'{base_dir}/{latest_filename}',base_dir)
         zipfile_basename = latest_filename[:-7]
-        command = ['./install.sh', '-u', 'foobar']
+        #command = ['./install.sh', '-u', 'foobar']
         run_command(f'{base_dir}/{unzip_dir}/{zipfile_basename}', command)
         
     return 0
