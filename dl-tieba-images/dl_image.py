@@ -7,8 +7,10 @@ import os
 from urllib.parse import urlparse
 from urllib.parse import quote
 import time
+from datetime import datetime  
 
 base_dir = "./images"
+
 
 
 def append_basedir(domain_and_path):
@@ -69,33 +71,41 @@ def get_page(url):
 def fetch_img(url):
     html_content = get_page(url)
     if html_content:
+        now = datetime.now()  
+        formatted_date = now.strftime("%Y-%m-%d %H:%M:%S") 
+        print(f'{formatted_date} ： {page_url} : {len(html_content)} ')
         pattern = r'<img\s+[^>]*\bsrc\s*=\s*["\']?([^"\'>\s]+)["\']?[^>]*>'
         image_urls = re.findall(pattern, html_content)
         for img_url in image_urls:
             if ('tiebapic.baidu.com/forum' in img_url or 'imgsa.baidu.com' in img_url) and not '285356884' in img_url:
                 print(f'{img_url} \n')
-                #print(get_filename_from_url(img_url))        
+                #print(get_filename_from_url(img_url))       
+                time.sleep(2)                
                 download_to_dir(img_url)
 
 tieba_name = '张颂文'
 encoded_name = quote(tieba_name, encoding='utf-8')
-index_num = 4250
-page_num=1
+index_num = 4200
+page_num=20
 #fetch_url(url)
+total_urls = []
 
 for _ in range(page_num):  # 重复五次
     if index_num<0:
         break
     url=f'https://tieba.baidu.com/f?kw={encoded_name}&ie=utf-8&pn={index_num}'
+    print(f'inde_paget: {url}')
     html_content = get_page(url)
     #print(html_content)
     if html_content:
         pattern = r'href=\"(/p/\d+)\"'
         urls = re.findall(pattern, html_content)
         for url in urls:
-            page_url = f'https://tieba.baidu.com{url}'
-            fetch_img(page_url)
-            time.sleep(30)
+            post_url = f'https://tieba.baidu.com{url}'
+            total_urls.append(post_url)
+            print(post_url)
+            #fetch_img(post_url)
+            time.sleep(5)
             
     index_num -= 50  # 对变量 i 减去 10
     

@@ -1,0 +1,2 @@
+Requests==2.32.3
+utils==1.0.2
